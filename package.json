@@ -1,0 +1,25 @@
+{
+  "name": "contactswebappbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Awais-Practice/ContactsWebAppBackend.git"
+  },
+  "author": "awais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Awais-Practice/ContactsWebAppBackend/issues"
+  },
+  "homepage": "https://github.com/Awais-Practice/ContactsWebAppBackend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.14"
+  }
+}
