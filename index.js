@@ -4,15 +4,19 @@ PORT = process.env.PORT || 4000;
 const mysql = require("mysql");
 
 // create connection
-const db = mysql.createConnection({
+// const db = mysql.createConnection({
+//   host: "31.170.167.61",
+//   user: "u768972843_awais",
+//   password: "4/OdOc=8#q",
+//   database: "u768972843_awais",
+// });
+
+var db = mysql.createPool({
+  connectionLimit: 10,
   host: "31.170.167.61",
   user: "u768972843_awais",
   password: "4/OdOc=8#q",
   database: "u768972843_awais",
-});
-db.connect((err) => {
-  if (err) throw err;
-  console.log("db connected successfully");
 });
 
 app.get("/test", (req, res) => {
