@@ -53,7 +53,7 @@ app.get("/addtwo", (req, res) => {
   });
   res.send("contact add successfully");
 });
-// update contact information
+// get all  contacts information
 
 app.get("/allcontacts", (req, res) => {
   let sql = "SELECT * FROM contacts";
@@ -61,6 +61,30 @@ app.get("/allcontacts", (req, res) => {
     console.log(results);
   });
   res.send("all postes fatched in console log");
+});
+
+// select single contact from db
+
+app.get("/selectedcontact/:id", (req, res) => {
+  let sql = `SELECT * FROM contacts WHERE id = ${req.params.id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    console.log(results);
+  });
+  res.send("contact selected through id single");
+});
+
+// update single contact
+
+app.get("/awais/:id", (req, res) => {
+  let userFname = "awaismalik";
+  let sql = `UPDATE contacts SET firstname = '${userFname}' WHERE id = ${req.params.id}`;
+
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+  });
+  res.send("contact first name update successfully");
 });
 
 app.listen(PORT, () => {
