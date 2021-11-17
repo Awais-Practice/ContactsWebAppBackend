@@ -65,23 +65,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// second contact
-// app.get("/addtwo", (req, res) => {
-//   let sql = "INSERT INTO contacts SET ?";
-//   let contact = {
-//     firstname: "mohsin",
-//     lastName: "Raza",
-//     email: "malikMohsin.q@gmail.com",
-//     phone: "03429996029",
-//   };
-//   db.query(sql, contact, (err, result) => {
-//     if (err) throw err;
-//     console.log(result);
-//   });
-//   res.send("contact add successfully");
-// });
-// get all  contacts information
-
 app.get("/allcontacts", (req, res) => {
   let sql = "SELECT * FROM contacts";
   db.query(sql, (err, results) => {
@@ -91,39 +74,36 @@ app.get("/allcontacts", (req, res) => {
 
 // select single contact from db
 
-// app.get("/selectedcontact/:id", (req, res) => {
-//   let sql = `SELECT * FROM contacts WHERE id = ${req.params.id}`;
-//   db.query(sql, (err, results) => {
-//     if (err) throw err;
-//     res.json(results);
-//   });
-//   res.send("contact selected through id single");
-// });
+app.get("/selectedcontact/:id", (req, res) => {
+  let sql = `SELECT * FROM contacts WHERE id = ${req.params.id}`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
 
 // update single contact
 
-// app.get("/awais/:id", (req, res) => {
-//   let userFname = "awaismalik";
-//   let sql = `UPDATE contacts SET firstname = '${userFname}' WHERE id = ${req.params.id}`;
+app.patch("/edit/:id", (req, res) => {
+  let userFname = "awaismalik";
+  let sql = `UPDATE contacts SET firstname = '${req.body.firstname}',lastname = '${req.body.lastName}',email = '${req.body.email}',notes = '${req.body.notes}',company = '${req.body.company}', jobTItle = '${req.body.jobTitle}', phone = '${req.body.phone}' WHERE id = ${req.params.id}`;
 
-//   db.query(sql, (err, result) => {
-//     if (err) throw err;
-//     console.log(result);
-//   });
-//   res.send("contact first name update successfully");
-// });
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+// Delete contact from db
+
+app.delete("/delete/:id", (req, res) => {
+  let sql = `DELETE FROM contacts WHERE id = '${req.params.id}'`;
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`server is running port number ${PORT}`);
 });
-
-//  id: 1,
-//   firstName: 'muhammad awais',
-//   email: 'awais.malik.q@gmail.com',
-//   phone: '0303-0989284',
-//   notes: 'this is notes data ',
-//   company: 'testing',
-//   jobTitle: 'free',
-//   img: 'assets/images/user.jpeg',
-//   lastName: 'malik',
-//   isContactSelect: false,
